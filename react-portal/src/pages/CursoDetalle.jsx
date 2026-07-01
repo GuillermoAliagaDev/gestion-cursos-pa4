@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 import { getCurso, inscribir, desinscribir } from '../services/api'
 
 export default function CursoDetalle() {
   const { id } = useParams()
+  const location = useLocation()
+  const from = location.state?.from
   const [curso, setCurso] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -60,7 +62,11 @@ export default function CursoDetalle() {
       <div className="page-header">
         <h2>Detalle del Curso</h2>
         <div className="page-actions">
-          <Link to="/cursos" className="btn btn-secondary">&larr; Volver al Catálogo</Link>
+          {from === 'dashboard' ? (
+            <Link to="/dashboard" className="btn btn-secondary">&larr; Volver a Mis Cursos</Link>
+          ) : (
+            <Link to="/cursos" className="btn btn-secondary">&larr; Volver al Catálogo</Link>
+          )}
         </div>
       </div>
       <div className="detalle-curso">

@@ -40,7 +40,7 @@ export default function Cursos() {
               </div>
               <p className="text-muted">{curso.inscritos}/{curso.vacantes} inscritos</p>
               <div className="card-footer">
-                <Link to={`/cursos/${curso.id}`} className="btn btn-sm btn-primary">Ver Detalle</Link>
+                <Link to={`/cursos/${curso.id}`} state={{ from: 'cursos' }} className="btn btn-sm btn-primary">Ver Detalle</Link>
               </div>
             </div>
           ))}
