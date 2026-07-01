@@ -87,20 +87,13 @@ ofcourse/
 ### 1. Clonar el repositorio
 
 ```bash
-git clone <URL_DEL_REPOSITORIO>
-cd ofcourse
+git clone https://github.com/GuillermoAliagaDev/gestion-cursos-pa4.git
+cd gestion-cursos-pa4
 ```
 
 ### 2. Instalar dependencias
 
 ```bash
-# Opción 1: Desde la raíz
-cd server && npm install
-cd ../react-portal && npm install
-cd ../nextjs-public && npm install
-cd ..
-
-# Opción 2: Usando el script raíz
 npm run install:all
 ```
 
@@ -126,21 +119,13 @@ NEXT_PUBLIC_API_URL=http://localhost:4000/api
 
 ### 4. Iniciar el proyecto
 
-En **tres terminales separadas**:
+Un solo comando desde la raíz:
 
 ```bash
-# Terminal 1 - API
-cd server
-npm run dev
-
-# Terminal 2 - Portal React
-cd react-portal
-npm run dev
-
-# Terminal 3 - Next.js Público
-cd nextjs-public
 npm run dev
 ```
+
+Esto levanta los 3 módulos simultáneamente (API, portal React y Next.js público).
 
 ### 5. Acceder
 
