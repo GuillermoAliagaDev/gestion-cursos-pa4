@@ -11,10 +11,12 @@ export default function Dashboard() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    let mounted = true
     getInscripciones()
-      .then(res => setInscripciones(res.data.inscripciones))
-      .catch(() => setError('Error al cargar inscripciones'))
-      .finally(() => setLoading(false))
+      .then(res => { if (mounted) setInscripciones(res.data.inscripciones) })
+      .catch(err => { if (mounted) setError(err.response?.data?.error || err.message || 'Error al cargar inscripciones') })
+      .finally(() => { if (mounted) setLoading(false) })
+    return () => { mounted = false }
   }, [])
 
   function handleLogout() {
@@ -49,12 +51,18 @@ export default function Dashboard() {
       <div className="card-grid">
         {inscripciones.map(ins => (
           <div key={ins.id} className="card">
-            <h4>{ins.curso.nombre}</h4>
-            <p className="text-muted">{ins.curso.docente}</p>
-            <p className="text-muted">{ins.curso.horario}</p>
-            <span className={`badge ${ins.curso.modalidad === 'Virtual' ? 'badge-virtual' : 'badge-presencial'}`}>
-              {ins.curso.modalidad}
-            </span>
+            <h4>{ins.curso?.nombre || 'Curso no disponible'}</h4>
+            {ins.curso ? (
+              <>
+                <p className="text-muted">{ins.curso.docente}</p>
+                <p className="text-muted">{ins.curso.horario}</p>
+                <span className={`badge ${ins.curso.modalidad === 'Virtual' ? 'badge-virtual' : 'badge-presencial'}`}>
+                  {ins.curso.modalidad}
+                </span>
+              </>
+            ) : (
+              <p className="text-muted">Curso no disponible</p>
+            )}
             <p className="text-muted">Inscrito el: {ins.fecha}</p>
             <Link to={`/cursos/${ins.cursoId}`} className="btn btn-sm btn-outline">Ver Detalle</Link>
           </div>
