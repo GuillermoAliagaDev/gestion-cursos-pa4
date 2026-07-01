@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Cursos from './pages/Cursos'
 import CursoDetalle from './pages/CursoDetalle'
+import Footer from './components/Footer'
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/cursos/:id" element={<ProtectedRoute><CursoDetalle /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
+      <Footer />
     </div>
   )
 }
