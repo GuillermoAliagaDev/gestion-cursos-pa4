@@ -68,7 +68,8 @@ app.get('/api/cursos', authMiddleware, (req, res) => {
 app.get('/api/cursos/:id', authMiddleware, (req, res) => {
   const curso = cursos.find(c => c.id === parseInt(req.params.id));
   if (!curso) return res.status(404).json({ error: 'Curso no encontrado' });
-  res.json({ curso });
+  const estaInscrito = inscripciones.some(i => i.estudianteId === req.usuario.id && i.cursoId === curso.id);
+  res.json({ curso: { ...curso, estaInscrito } });
 });
 
 app.get('/api/estudiante/inscripciones', authMiddleware, (req, res) => {
@@ -98,6 +99,17 @@ app.post('/api/estudiante/inscribir', authMiddleware, (req, res) => {
   inscripciones.push(nueva);
   curso.inscritos += 1;
   res.status(201).json({ inscripcion: nueva, message: 'Inscripción exitosa' });
+});
+
+app.post('/api/estudiante/desinscribir', authMiddleware, (req, res) => {
+  const { cursoId } = req.body;
+  if (!cursoId) return res.status(400).json({ error: 'cursoId requerido' });
+  const idx = inscripciones.findIndex(i => i.estudianteId === req.usuario.id && i.cursoId === cursoId);
+  if (idx === -1) return res.status(400).json({ error: 'No estás inscrito en este curso' });
+  inscripciones.splice(idx, 1);
+  const curso = cursos.find(c => c.id === cursoId);
+  if (curso) curso.inscritos -= 1;
+  res.json({ message: 'Te has retirado del curso exitosamente' });
 });
 
 app.get('/api/public/cursos', (req, res) => {

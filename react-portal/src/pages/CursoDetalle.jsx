@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { getCurso, inscribir } from '../services/api'
+import { getCurso, inscribir, desinscribir } from '../services/api'
 
 export default function CursoDetalle() {
   const { id } = useParams()
   const [curso, setCurso] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [inscribiendo, setInscribiendo] = useState(false)
+  const [procesando, setProcesando] = useState(false)
   const [mensaje, setMensaje] = useState('')
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function CursoDetalle() {
   }, [id])
 
   async function handleInscribir() {
-    setInscribiendo(true)
+    setProcesando(true)
     setMensaje('')
     try {
       const res = await inscribir(parseInt(id))
@@ -30,7 +30,22 @@ export default function CursoDetalle() {
     } catch (err) {
       setMensaje(err.response?.data?.error || 'Error al inscribirse')
     } finally {
-      setInscribiendo(false)
+      setProcesando(false)
+    }
+  }
+
+  async function handleDesinscribir() {
+    setProcesando(true)
+    setMensaje('')
+    try {
+      const res = await desinscribir(parseInt(id))
+      setMensaje(res.data.message || 'Te has retirado del curso')
+      const updated = await getCurso(id)
+      setCurso(updated.data.curso)
+    } catch (err) {
+      setMensaje(err.response?.data?.error || 'Error al retirarse')
+    } finally {
+      setProcesando(false)
     }
   }
 
@@ -67,10 +82,14 @@ export default function CursoDetalle() {
             <h4>Descripción</h4>
             <p>{curso.descripcion}</p>
           </div>
-          {mensaje && <div className={`alert ${mensaje.includes('exitosa') ? 'alert-success' : 'alert-error'}`}>{mensaje}</div>}
-          {vacantesDisponibles > 0 ? (
-            <button onClick={handleInscribir} className="btn btn-primary btn-full" disabled={inscribiendo}>
-              {inscribiendo ? 'Inscribiendo...' : 'Inscribirme a este curso'}
+          {mensaje && <div className={`alert ${mensaje.includes('exitosamente') || mensaje.includes('retirado') ? 'alert-success' : mensaje.includes('exitosa') ? 'alert-success' : 'alert-error'}`}>{mensaje}</div>}
+          {curso.estaInscrito ? (
+            <button onClick={handleDesinscribir} className="btn btn-danger btn-full" disabled={procesando}>
+              {procesando ? 'Procesando...' : 'Retirarme de este curso'}
+            </button>
+          ) : vacantesDisponibles > 0 ? (
+            <button onClick={handleInscribir} className="btn btn-primary btn-full" disabled={procesando}>
+              {procesando ? 'Inscribiendo...' : 'Inscribirme a este curso'}
             </button>
           ) : (
             <div className="alert alert-error">Curso sin vacantes disponibles</div>

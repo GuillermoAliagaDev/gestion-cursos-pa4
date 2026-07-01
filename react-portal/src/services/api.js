@@ -44,4 +44,8 @@ export function inscribir(cursoId) {
   return api.post('/estudiante/inscribir', { cursoId })
 }
 
+export function desinscribir(cursoId) {
+  return api.post('/estudiante/desinscribir', { cursoId })
+}
+
 export default api
