@@ -1,0 +1,16 @@
+{
+  "name": "ofcourse",
+  "version": "1.0.0",
+  "description": "OfCourse - Gestión de Cursos e Inscripciones (Experiencia Integrada)",
+  "private": true,
+  "scripts": {
+    "install:all": "cd server && npm install && cd ../react-portal && npm install && cd ../nextjs-public && npm install",
+    "dev:api": "cd server && npm run dev",
+    "dev:portal": "cd react-portal && npm run dev",
+    "dev:nextjs": "cd nextjs-public && npm run dev",
+    "build:portal": "cd react-portal && npm run build",
+    "build:nextjs": "cd nextjs-public && npm run build",
+    "start:api": "cd server && npm start",
+    "start:nextjs": "cd nextjs-public && npm start"
+  }
+}
