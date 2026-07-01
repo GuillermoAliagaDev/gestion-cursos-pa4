@@ -125,6 +125,15 @@ npm run dev
 
 Esto levanta los 3 módulos simultáneamente (API, portal React y Next.js público).
 
+> **⚠️ Nota:** Si ya hay un proceso corriendo en el puerto `4000`, la API fallará con `EADDRINUSE`. Para matarlo manualmente:
+> ```bash
+> netstat -ano | findstr :4000
+> taskkill /F /PID <PID>
+> ```
+> Luego vuelva a ejecutar `npm run dev`.
+
+
+
 ### 5. Acceder
 
 | Módulo | URL |
