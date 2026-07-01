@@ -56,7 +56,7 @@ export default function Dashboard() {
                 )}
                 <p className="text-muted">Inscrito el: {ins.fecha}</p>
                 <div className="card-footer">
-                  <Link to={`/cursos/${ins.cursoId}`} state={{ from: 'dashboard' }} className="btn btn-sm btn-secondary">Ver Detalle</Link>
+                  <Link to={`/cursos/${ins.cursoId}?from=dashboard`} className="btn btn-sm btn-secondary">Ver Detalle</Link>
                 </div>
               </div>
             ))}

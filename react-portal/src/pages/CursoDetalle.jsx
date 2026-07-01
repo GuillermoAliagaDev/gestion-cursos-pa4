@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link, useLocation } from 'react-router-dom'
+import { useParams, Link, useSearchParams } from 'react-router-dom'
 import { getCurso, inscribir, desinscribir } from '../services/api'
 
 export default function CursoDetalle() {
   const { id } = useParams()
-  const location = useLocation()
-  const from = location.state?.from
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
   const [curso, setCurso] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
