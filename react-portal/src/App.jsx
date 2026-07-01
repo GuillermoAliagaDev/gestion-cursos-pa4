@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Cursos from './pages/Cursos'
 import CursoDetalle from './pages/CursoDetalle'
+import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
 
   return (
     <div className="app">
+      {!isLogin && <Navbar />}
       <main className="main-content">
         <Routes>
           <Route path="/login" element={<Login />} />
