@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getInscripciones } from '../services/api'
 
 export default function Dashboard() {
   const { usuario } = useAuth()
+  const navigate = useNavigate()
   const [inscripciones, setInscripciones] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -56,7 +57,7 @@ export default function Dashboard() {
                 )}
                 <p className="text-muted">Inscrito el: {ins.fecha}</p>
                 <div className="card-footer">
-                  <Link to={`/cursos/${ins.cursoId}?from=dashboard`} className="btn btn-sm btn-secondary">Ver Detalle</Link>
+                  <button onClick={() => navigate(`/cursos/${ins.cursoId}?from=dashboard`)} className="btn btn-sm btn-secondary">Ver Detalle</button>
                 </div>
               </div>
             ))}
