@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { getInscripciones } from '../services/api'
 
 export default function Dashboard() {
+
   const { usuario } = useAuth()
   const navigate = useNavigate()
   const [inscripciones, setInscripciones] = useState([])
@@ -21,6 +22,7 @@ export default function Dashboard() {
 
   return (
     <div className="page-wrap">
+      
       <div className="dashboard-welcome">
         <h2>Bienvenido, {usuario?.nombre}</h2>
         <p className="welcome-sub">Código: {usuario?.codigo} &middot; {usuario?.correo}</p>
@@ -33,6 +35,7 @@ export default function Dashboard() {
           <p>Aún no estás inscrito en ningún curso.</p>
           <Link to="/cursos" className="btn btn-primary">Explorar Catálogo</Link>
         </div>
+
       )}
       {!loading && !error && inscripciones.length > 0 && (
         <>
@@ -45,9 +48,11 @@ export default function Dashboard() {
                   <>
                     <p className="text-muted">{ins.curso.docente}</p>
                     <p className="text-muted">{ins.curso.horario}</p>
+
                     <span className={`badge ${ins.curso.modalidad === 'Virtual' ? 'badge-virtual' : 'badge-presencial'}`}>
                       {ins.curso.modalidad}
                     </span>
+
                     <div className="vacantes-bar">
                       <div className="vacantes-fill" style={{ width: `${(ins.curso.inscritos / ins.curso.vacantes) * 100}%` }} />
                     </div>
@@ -56,6 +61,7 @@ export default function Dashboard() {
                   <p className="text-muted">Curso no disponible</p>
                 )}
                 <p className="text-muted">Inscrito el: {ins.fecha}</p>
+
                 <div className="card-footer">
                   <button onClick={() => navigate(`/cursos/${ins.cursoId}?from=dashboard`)} className="btn btn-sm btn-secondary">Ver Detalle</button>
                 </div>

@@ -3,10 +3,16 @@ import { Link } from 'react-router-dom'
 import { getCursos } from '../services/api'
 
 export default function Cursos() {
+
+  // Manejo del estado global de la vista
   const [cursos, setCursos] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
+  /**
+   * Efecto de inicialización del componente.
+   * Consume el endpoint de cursos y maneja la resolución y el rechazo de la promesa.
+   */
   useEffect(() => {
     getCursos()
       .then(res => setCursos(res.data.cursos))
@@ -22,6 +28,7 @@ export default function Cursos() {
           <Link to="/dashboard" className="btn btn-secondary">Mis Cursos</Link>
         </div>
       </div>
+
       {loading && <div className="loading-spinner">Cargando cursos...</div>}
       {error && <div className="alert alert-error">{error}</div>}
       {!loading && !error && (
