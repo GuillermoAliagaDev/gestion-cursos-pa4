@@ -8,10 +8,8 @@
 
 | Integrante | Rol | Aporte |
 |------------|-----|--------|
-| _Nombre del integrante 1_ | _Rol_ | _% de aporte_ |
-| _Nombre del integrante 2_ | _Rol_ | _% de aporte_ |
-| _Nombre del integrante 3_ | _Rol_ | _% de aporte_ |
-| _Nombre del integrante 4_ | _Rol_ | _% de aporte_ |
+| _Guillermo Aliaga Matencio_ | _Rol_ | _50%_ |
+| _Geraldine Khatrina Tudela Theo_ | _Rol_ | _50%_ |
 
 ---
 
