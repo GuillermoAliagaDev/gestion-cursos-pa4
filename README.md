@@ -223,37 +223,21 @@ Ambos builds se han verificado sin errores críticos.
 
 ## Capturas de Pantalla
 
-_> Inserte aquí capturas de las vistas principales:_
 
 | Vista | Captura |
 |-------|---------|
-| Login | `[captura]` |
-| Dashboard | `[captura]` |
-| Catálogo de cursos | `[captura]` |
-| Detalle de curso | `[captura]` |
-| Next.js - Inicio | `[captura]` |
-| Next.js - Catálogo público | `[captura]` |
-| Next.js - Detalle público | `[captura]` |
-| Build exitoso | `[captura]` |
+| Login | <img src="./images/vista1.jpeg" width="300"> |
+| Dashboard | <img src="./images/vista2.jpeg" width="300"> |
+| Catálogo de cursos | <img src="./images/vista4.jpeg" width="300"> |
+| Detalle de curso | <img src="./images/vista3.jpeg" width="300"> |
+| Next.js - Inicio | <img src="./images/vista5.jpeg" width="300"> |
+| Next.js - Catálogo público | <img src="./images/vista6.jpeg" width="300"> |
 
 ---
 
 ## Video de Sustentación
 
 [▶ Ver video en YouTube](https://youtube.com/URL_DEL_VIDEO)
-
-> El video muestra a los integrantes con cámaras encendidas explicando el trabajo realizado, las decisiones técnicas y la funcionalidad del sistema.
-
----
-
-## Distribución de Aportes
-
-| Integrante | Contribución |
-|------------|-------------|
-| _Nombre 1_ | API REST, autenticación JWT |
-| _Nombre 2_ | Portal React, vistas, consumo de API |
-| _Nombre 3_ | Módulo Next.js, rutas, SSG |
-| _Nombre 4_ | Documentación, README, video |
 
 ---
 
